@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "devai"
+name = "stackai-cli"
 version = "0.1.0"
 description = "AI-powered Docker assistant — detects your stack, generates Dockerfile & compose, debugs containers."
 readme = "README.md"
@@ -24,11 +24,12 @@ dependencies = [
 ]
 
 [project.scripts]
-devai = "devai.cli:main"
+stackai = "devai.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/MehdiB7/devai"
 Repository = "https://github.com/MehdiB7/devai"
+Bug-Tracker = "https://github.com/MehdiB7/devai/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

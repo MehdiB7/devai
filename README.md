@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-pip install devai
+pip install stackai-cli
 ```
 
 > Requiert [Ollama](https://ollama.com) installé et `ollama pull llama3` pour le mode debug AI.
@@ -18,7 +18,7 @@ pip install devai
 
 ```bash
 cd mon-projet
-devai init
+stackai init
 ```
 
 ```
@@ -35,7 +35,7 @@ devai init
 ### `devai scan` — Voir la stack sans rien générer
 
 ```bash
-devai scan
+stackai scan
 ```
 
 ```
@@ -50,7 +50,7 @@ devai scan
 ### `devai debug` — Analyser un container en erreur
 
 ```bash
-devai debug mon-container
+stackai debug mon-container
 ```
 
 ```
