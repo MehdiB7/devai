@@ -1,8 +1,12 @@
-# devai
+# stackai-cli
 
-> AI-powered Docker assistant. No config needed.
+> AI-powered Docker assistant. No configuration needed.
 
-`devai` analyse ton projet, génère le Dockerfile et le docker-compose, et debug tes containers avec l'IA — le tout en une commande.
+`stackai` analyzes your project, generates an optimized Dockerfile and docker-compose, and debugs your containers using a local AI model — all in a single command.
+
+[![PyPI version](https://img.shields.io/pypi/v/stackai-cli.svg)](https://pypi.org/project/stackai-cli/)
+[![Python](https://img.shields.io/pypi/pyversions/stackai-cli.svg)](https://pypi.org/project/stackai-cli/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
@@ -10,82 +14,86 @@
 pip install stackai-cli
 ```
 
-> Requiert [Ollama](https://ollama.com) installé et `ollama pull llama3` pour le mode debug AI.
+> `stackai debug` requires [Ollama](https://ollama.com) running locally with `ollama pull llama3`.
 
-## Utilisation
+## Commands
 
-### `devai init` — Générer les fichiers Docker
+### `stackai init` — Generate Docker files from your project
 
 ```bash
-cd mon-projet
+cd my-project
 stackai init
 ```
 
 ```
-🔍 Analyse du projet...
-✅ Stack détectée : python / fastapi + postgres + redis
-⚙️  Génération des fichiers Docker...
-  ✅ Dockerfile créé
-  ✅ .dockerignore créé
-  ✅ docker-compose.yaml créé
+🔍 Analyzing project...
+✅ Stack detected: python / fastapi + postgres + redis
+⚙️  Generating Docker files...
+  ✅ Dockerfile created
+  ✅ .dockerignore created
+  ✅ docker-compose.yaml created
 
-🚀 Prêt ! Lance avec : docker compose up -d
+🚀 Ready! Run: docker compose up -d
 ```
 
-### `devai scan` — Voir la stack sans rien générer
+### `stackai scan` — Inspect detected stack without generating files
 
 ```bash
 stackai scan
 ```
 
 ```
-📦 Stack détectée :
-  Langage     : python
+📦 Stack detected:
+  Language    : python
   Framework   : fastapi
   Port        : 8000
   Services    : postgres, redis
   Python ver. : 3.11
 ```
 
-### `devai debug` — Analyser un container en erreur
+### `stackai debug` — Analyze a failing container with AI
 
 ```bash
-stackai debug mon-container
+stackai debug my-container
 ```
 
 ```
-📋 Derniers logs :
+📋 Latest logs:
   ─────────────────────────────────────────
   Error: could not connect to postgres...
   ─────────────────────────────────────────
 
-🤖 Analyse IA en cours...
+🤖 Running AI analysis...
 
-💡 Analyse :
-1. PROBLÈME : L'application ne peut pas se connecter à PostgreSQL
-2. CAUSE : Le container postgres n'est pas encore prêt au démarrage de l'app
-3. FIX : Ajoute `depends_on: [postgres]` dans ton docker-compose.yaml
+💡 Analysis:
+1. PROBLEM : The app cannot connect to PostgreSQL
+2. CAUSE   : The postgres container is not ready when the app starts
+3. FIX     : Add `depends_on: [postgres]` in your docker-compose.yaml
 ```
 
-## Stacks supportées
+## Supported Stacks
 
-| Langage | Frameworks détectés |
-|---------|-------------------|
-| Python | FastAPI, Flask, Django, générique |
-| Node.js | Express, Next.js, Nuxt.js, React |
-| Java | Spring Boot (Maven/Gradle) |
-| Go | générique |
+| Language | Detected Frameworks |
+|----------|-------------------|
+| Python   | FastAPI, Flask, Django, generic |
+| Node.js  | Express, Next.js, Nuxt.js, React |
+| Java     | Spring Boot (Maven / Gradle) |
+| Go       | generic |
 
-## Services auto-détectés
+## Auto-detected Services
 
 `postgres` · `redis` · `mongodb` · `mysql` · `elasticsearch`
 
-## Prérequis
+## Requirements
 
 - Python 3.10+
-- Docker installé
-- [Ollama](https://ollama.com) + `ollama pull llama3` (pour `devai debug`)
+- Docker installed and running
+- [Ollama](https://ollama.com) + `ollama pull llama3` (only for `stackai debug`)
 
-## Licence
+## Contributing
 
-MIT
+Pull requests are welcome. For major changes, please open an issue first.
+
+## License
+
+MIT © [El Mehdi Boutahar](https://github.com/MehdiB7)
