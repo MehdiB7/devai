@@ -3,23 +3,34 @@ import re
 from pathlib import Path
 
 
-# Mapping dépendance → service Docker requis
+# Mapping dépendance → service(s) Docker requis
+# Un service peut en impliquer plusieurs (ex: airflow → airflow + postgres)
 SERVICE_HINTS = {
-    "psycopg2": "postgres",
-    "asyncpg": "postgres",
-    "sqlalchemy": "postgres",
-    "apache-airflow": "postgres",
-    "airflow": "postgres",
-    "pymongo": "mongodb",
-    "motor": "mongodb",
-    "redis": "redis",
-    "celery": "redis",
-    "elasticsearch": "elasticsearch",
-    "kafka": "kafka",
-    "mysql-connector": "mysql",
-    "pymysql": "mysql",
-    "boto3": "minio",
-    "s3fs": "minio",
+    # Databases
+    "psycopg2": ["postgres"],
+    "asyncpg": ["postgres"],
+    "sqlalchemy": ["postgres"],
+    "pymongo": ["mongodb"],
+    "motor": ["mongodb"],
+    "mysql-connector": ["mysql"],
+    "pymysql": ["mysql"],
+    # Cache / Queue
+    "redis": ["redis"],
+    "celery": ["redis"],
+    # Search
+    "elasticsearch": ["elasticsearch"],
+    # Streaming
+    "kafka": ["kafka"],
+    # Object storage
+    "boto3": ["minio"],
+    "s3fs": ["minio"],
+    # Big Data
+    "pyspark": ["spark"],
+    "delta-spark": ["spark"],
+    "pyflink": ["flink"],
+    # Orchestration (Airflow implique postgres)
+    "apache-airflow": ["airflow", "postgres"],
+    "airflow": ["airflow", "postgres"],
 }
 
 # Mapping dépendance → framework
@@ -69,7 +80,7 @@ def _detect_python(path: Path, dep_file: Path) -> dict:
             port = p
             break
 
-    services = list({SERVICE_HINTS[d] for d in deps if d in SERVICE_HINTS})
+    services = list({s for dep in deps if dep in SERVICE_HINTS for s in SERVICE_HINTS[dep]})
 
     python_version = _detect_python_version(path)
 
@@ -101,7 +112,7 @@ def _detect_node(path: Path) -> dict:
         framework = "react"
         port = 3000
 
-    services = list({SERVICE_HINTS[d] for d in deps_lower if d in SERVICE_HINTS})
+    services = list({s for dep in deps_lower if dep in SERVICE_HINTS for s in SERVICE_HINTS[dep]})
 
     return {
         "language": "nodejs",
