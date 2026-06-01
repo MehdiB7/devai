@@ -8,6 +8,8 @@ SERVICE_HINTS = {
     "psycopg2": "postgres",
     "asyncpg": "postgres",
     "sqlalchemy": "postgres",
+    "apache-airflow": "postgres",
+    "airflow": "postgres",
     "pymongo": "mongodb",
     "motor": "mongodb",
     "redis": "redis",
@@ -16,6 +18,8 @@ SERVICE_HINTS = {
     "kafka": "kafka",
     "mysql-connector": "mysql",
     "pymysql": "mysql",
+    "boto3": "minio",
+    "s3fs": "minio",
 }
 
 # Mapping dépendance → framework
