@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devai"
+version = "0.1.0"
+description = "AI-powered Docker assistant — detects your stack, generates Dockerfile & compose, debugs containers."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "El Mehdi Boutahar", email = "boutahar.elmehdi@gmail.com" }]
+keywords = ["docker", "ai", "devops", "cli", "ollama", "automation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Build Tools",
+]
+dependencies = [
+    "click>=8.1",
+]
+
+[project.scripts]
+devai = "devai.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/MehdiB7/devai"
+Repository = "https://github.com/MehdiB7/devai"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["devai*"]
